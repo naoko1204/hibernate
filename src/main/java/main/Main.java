@@ -15,19 +15,15 @@ public class Main {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        Address address = Address.builder()
-                .city("Moscow")
-                .street("Some street")
-                .build();
-
         Student student = Student.builder()
-                .fullName("Ivan Ivanov")
-                .address(address)
+                .fullName("Oleg Olegov")
+                .city("London")
+                .street("Street1")
                 .build();
-
         Student student2 = Student.builder()
-                .fullName("Petea Petrov")
-                .address(address)
+                .fullName("Vladimir Vladimirov")
+                .city("New-York")
+                .street("Street2")
                 .build();
 
         entityManager.getTransaction().begin();
