@@ -17,14 +17,19 @@ public class Main {
 
         entityManager.getTransaction().begin();
 
-        Address address = Address.builder()
-                .street("Tighina")
-                .city("Chisinau")
-                .student(Student.builder()
-                        .fullName("Alexandr Alexandrov")
-                        .build())
+        Student student = Student.builder()
+                .fullName("Egor Egorov")
                 .build();
-        entityManager.persist(address);
+
+        Address address = Address.builder()
+                .city("Chisinau")
+                .street("Puskin")
+                .student(student)
+                .build();
+
+        student.setAddress(address);
+
+        entityManager.persist(student);
 
         entityManager.getTransaction().commit();
 
