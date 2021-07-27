@@ -1,41 +1,34 @@
 package entities;
 
-import enums.Color;
+import embeddable.Address;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
 
 @Entity
+@Builder
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Car {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String model;
+    @Column(name = "full_name", length = 50)
+    private String fullName;
 
-    @Enumerated(EnumType.ORDINAL)
-    private Color color;
+    @Embedded
+    private Address address;
 
-    @Column(name = "prod_year")
-    private LocalDate prodYear;
-
-    private float mileage;
 
 }

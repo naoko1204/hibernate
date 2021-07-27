@@ -1,6 +1,9 @@
 package main;
 
+import embeddable.Address;
 import entities.Car;
+import entities.Student;
+import enums.Color;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,14 +15,28 @@ public class Main {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("my-persistence-unit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        Car car1 = Car.builder()
-                .model("Lada")
+        Address address = Address.builder()
+                .city("Moscow")
+                .street("Some street")
+                .build();
+
+        Student student = Student.builder()
+                .fullName("Ivan Ivanov")
+                .address(address)
+                .build();
+
+        Student student2 = Student.builder()
+                .fullName("Petea Petrov")
+                .address(address)
                 .build();
 
         entityManager.getTransaction().begin();
 
-        entityManager.persist(car1);
+        entityManager.persist(student);
+        entityManager.persist(student2);
 
         entityManager.getTransaction().commit();
+
+        entityManager.close();
     }
 }
