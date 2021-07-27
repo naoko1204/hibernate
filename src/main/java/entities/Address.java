@@ -5,27 +5,32 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-@Builder
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+@Builder
+@Getter
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "full_name", length = 50)
-    private String fullName;
+    private String street;
 
+    private String city;
 
+    @JoinColumn(name = "student_id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private Student student;
 
 
 }
